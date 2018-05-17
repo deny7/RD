@@ -1,0 +1,304 @@
+<html>
+    <head>
+        <title>baseball-GAME</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            li{
+                list-style-type: none;
+            }
+            #answer{
+                width: 50px;
+                height: 25px;
+                border: 0px;
+                background: white;
+                color: white;
+                text-align: center;
+            }
+            #answer:hover{
+                color: black;
+            }
+            #left{
+                margin: 20px 0 0 20px;
+                float: left;
+            }
+            #middle{
+                margin: 20px 0 0 20px;
+                float: left;
+            }
+            #middle #first li{
+                display: inline;
+            }
+            #middle input{
+                text-align: center;
+                vertical-align: middle;
+            }
+            #middle_top{
+                margin-left: 30px;
+            }
+            #middle_center{
+                width: 20px;
+            }
+
+
+            #right{
+                margin: 20px 0 0 20px;
+                float: left;
+                width: 300px;
+            }
+            #right input{
+                border: solid 1px white;
+                width: 300px;
+                margin-top: 2px;
+            }
+        </style>
+
+
+        <script>
+            var n1=-1; var n2=-1; var n3=-1; var n4=-1;
+            for(i=1;i<=4;i++){
+                var gameNum=Math.floor(Math.random() * 10);
+                if(n1==gameNum||n2==gameNum||n3==gameNum||n4==gameNum){
+                i--;
+                }
+                else{
+                    if(i==1)n1=gameNum;
+                    if(i==2)n2=gameNum;
+                    if(i==3)n3=gameNum;
+                    if(i==4)n4=gameNum;
+                }
+            }
+
+            n5=String(n1+""+n2+""+n3+""+n4);
+            //alert(n5.substr(0,4));
+
+            var nGuesses=0;
+            var ball=0;
+            var strike=0;
+
+            function guess(){
+                var result = "";
+                var number = parseInt(document.getElementById("user").value);
+                nGuesses++;
+
+                strike=0;
+                ball=0;
+                
+                number=String(number);
+                PN1=number.substr(0,1);
+                PN2=number.substr(1,1);
+                PN3=number.substr(2,1);
+                PN4=number.substr(3,1);
+
+                
+                if(n1==PN1){strike++;}
+                if(n2==PN2){strike++;}
+                if(n3==PN3){strike++;}
+                if(n4==PN4){strike++;}
+                if(n1==PN2||n1==PN3||n1==PN4){ball++;}
+                if(n2==PN1||n2==PN3||n2==PN4){ball++;}
+                if(n3==PN1||n3==PN2||n3==PN4){ball++;}
+                if(n4==PN1||n4==PN2||n4==PN3){ball++;}
+
+                if(n5==number) {
+                    result = strike + "Strike";
+                    alert(nGuesses + "번 만에 맞추셨습니다");
+                }
+                else{
+                    if(PN1==PN2||PN1==PN3||PN1==PN4||PN2==PN3||PN2==PN4||PN3==PN4){
+                    result = "중복되지 않게 입력하세요"
+                    }
+                    else{
+                        result = strike + "Strike " + ball +"ball";
+                    }
+                }
+                document.getElementById("result").value = result;
+                document.getElementById("guesses").value = nGuesses;
+                document.getElementById("log"+nGuesses).value = nGuesses+" ) "+number+" "+result;
+                return true;
+            }
+
+
+            function ans(){
+                document.getElementById("answer").value = n5.substr(0,4);
+            }
+            function newGame(){
+                location.reload(true);
+            }
+            function cleaner(){
+                for(i=1; i<=4; i++)document.getElementById("first"+i).value = "";
+            }
+            function packing(){
+                cbox0 = guess_form.chk0; cbox1 = guess_form.chk1; cbox2 = guess_form.chk2; cbox3 = guess_form.chk3;
+                cbox4 = guess_form.chk4; cbox5 = guess_form.chk5; cbox6 = guess_form.chk6; cbox7 = guess_form.chk7;
+                cbox8 = guess_form.chk8; cbox9 = guess_form.chk9;
+                if(cbox0.length){for(var i = 0; i<cbox0.length;i++)cbox0[i].checked=guess_form.all0.checked;}
+                else cbox0.checked=guess_form.all0.checked;
+                if(cbox1.length){for(var i = 0; i<cbox1.length;i++)cbox1[i].checked=guess_form.all1.checked;}
+                else cbox1.checked=guess_form.all1.checked;
+                if(cbox2.length){for(var i = 0; i<cbox2.length;i++)cbox2[i].checked=guess_form.all2.checked;}
+                else cbox2.checked=guess_form.all2.checked;
+                if(cbox3.length){for(var i = 0; i<cbox3.length;i++)cbox3[i].checked=guess_form.all3.checked;}
+                else cbox3.checked=guess_form.all3.checked;
+                if(cbox4.length){for(var i = 0; i<cbox4.length;i++)cbox4[i].checked=guess_form.all4.checked;}
+                else cbox4.checked=guess_form.all4.checked;
+                if(cbox5.length){for(var i = 0; i<cbox5.length;i++)cbox5[i].checked=guess_form.all5.checked;}
+                else cbox5.checked=guess_form.all5.checked;
+                if(cbox6.length){for(var i = 0; i<cbox6.length;i++)cbox6[i].checked=guess_form.all6.checked;}
+                else cbox6.checked=guess_form.all6.checked;
+                if(cbox7.length){for(var i = 0; i<cbox7.length;i++)cbox7[i].checked=guess_form.all7.checked;}
+                else cbox7.checked=guess_form.all7.checked;
+                if(cbox8.length){for(var i = 0; i<cbox8.length;i++)cbox8[i].checked=guess_form.all8.checked;}
+                else cbox8.checked=guess_form.all8.checked;
+                if(cbox9.length){for(var i = 0; i<cbox9.length;i++)cbox9[i].checked=guess_form.all9.checked;}
+                else cbox9.checked=guess_form.all9.checked;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="left">
+            <a align="center"><h2><font color="blue">숫자 야구 게임</font></h2></a>
+                <br>이 게임은 컴퓨터가 생성한 숫자를 맞추는 게임입니다.<br>숫자는 4자리이며, 각 자리의 수들은 중복되지 않습니다.<br>0~9까지의 4자리 숫자를 맞춰보세요.
+            <form>
+                <br>
+                INPUT:
+                <input type="text" id="user" size="4"/>
+                <input type="button" value="CHECK" onclick="guess();"/><br><br>
+                TRY CNT:
+                <input type="text" id="guesses" size="5"/><br><br>
+                HINT:
+                <input type="text" id="result" size="18"/>
+                
+                <br><br>
+
+                <div>
+                    <input type="button" value="ANSWER >>" onclick="ans();"/>
+                    <input type="text" id="answer" size="18"/>
+                </div>
+                <br>
+                <div>
+                    <input type="button" value="NEW GAME" onclick="newGame();"/>
+                </div>
+            </form>
+        </div>
+
+        <div id="middle">
+            <div id="middle_top">
+                <b>GUESS NUMBER!</b><br>
+                <ul id="first">
+                <li><input type="text" id="first1" style="width: 20px"/></li>
+                <li><input type="text" id="first2" style="width: 20px"/></li>
+                <li><input type="text" id="first3" style="width: 20px"/></li>
+                <li><input type="text" id="first4" style="width: 20px"/></li>
+                <li><input type="button" style="width: 50px" value="초기화" onclick="cleaner()"/></li>
+                </ul>
+            </div>
+
+            <div id="middle_center">
+                <table border=1 cellspacing=3 bordercolor="white">
+                    <form id='guess_form'>
+                        <tr>
+                            <td><input type='text' id='no0' style='width: 20px' value='0' readonly/></td>
+                            <td><input type='checkbox' id='chk0' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk0' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk0' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk0' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all0' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='1' readonly/></td>
+                            <td><input type='checkbox' id='chk1' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk1' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk1' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk1' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all1' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='2' readonly/></td>
+                            <td><input type='checkbox' id='chk2' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk2' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk2' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk2' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all2' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='3' readonly/></td>
+                            <td><input type='checkbox' id='chk3' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk3' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk3' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk3' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all3' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='4' readonly/></td>
+                            <td><input type='checkbox' id='chk4' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk4' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk4' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk4' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all4' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='5' readonly/></td>
+                            <td><input type='checkbox' id='chk5' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk5' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk5' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk5' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all5' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='6' readonly/></td>
+                            <td><input type='checkbox' id='chk6' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk6' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk6' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk6' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all6' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='7' readonly/></td>
+                            <td><input type='checkbox' id='chk7' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk7' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk7' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk7' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all7' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='8' readonly/></td>
+                            <td><input type='checkbox' id='chk8' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk8' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk8' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk8' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all8' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                        <tr>
+                            <td><input type='text' style='width: 20px' value='9' readonly/></td>
+                            <td><input type='checkbox' id='chk9' style='width: 21px'/></td>
+                            <td><input type='checkbox' id='chk9' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk9' style='width: 20px'/></td>
+                            <td><input type='checkbox' id='chk9' style='width: 21px'/></td>
+                            <td valign="top" align="right"><font size=2>&nbsp;ALL</font></td>
+                            <td><input type='checkbox' id='all9' style='width: 20px' onclick='packing()'/></td>
+                        </tr>
+                    </form>
+                </table>
+            </div>
+        </div>
+
+        <div id="right">
+            <b>LOG</b>
+            <script>
+                for(i=1; i<=30; i++) document.write("<input id='log"+i+"' readonly>")
+            </script>
+        </div>
+    </body>
+</html>
